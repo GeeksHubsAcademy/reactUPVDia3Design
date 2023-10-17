@@ -1,10 +1,10 @@
 
 import "./CustomDropDown.css";
 
-export const CustomDropDown = ({array, criteria, onChange}) => {
+export const CustomDropDown = ({array, criteria, handlerFunction, name}) => {
 
     return (
-        <select onChange={onChange}>
+        <select onChange={(e)=>handlerFunction(e, name)}>
             <option value={`Select a ${criteria}`}>
               -- Select a {criteria} --
             </option>

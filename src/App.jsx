@@ -9,8 +9,10 @@ import { CustomDropDown } from "./common/CustomDropdown/CustomDropDown";
 function App() {
   const [characters, setCharacters] = useState([]);
   const [locations, setLocations] = useState([]);
-  const [selectedId, setSelectedId] = useState(0);
-  const [selectedLocation, setSelectedLocation] = useState(0);
+  const [selectedData, setSelectedData] = useState({
+    characterId: "",
+    locationId: ""
+  });
 
   useEffect(() => {
     if (characters.length === 0) {
@@ -33,22 +35,17 @@ function App() {
     } 
   }, [locations]);
   
+  useEffect(()=> {
+    console.log(selectedData);
+  }, [selectedData])
 
-  useEffect(() => {
-    console.log("La id seleccionada es.... ", selectedId);
-  }, [selectedId]);
-
-  useEffect(() => {
-    console.log("La id seleccionada de location es.... ", selectedLocation);
-  }, [selectedLocation]);
-
-  const selectCharHandler = (e) => {
-    setSelectedId(e.target.value);
-  };
-
-  const selectLocaHandler = (e) => {
-    setSelectedLocation(e.target.value);
-  };
+  const selectHandler = (e, name) => {
+    //Handler dinámico para objeto de JavaScript.
+    setSelectedData((prevState) => ({
+      ...prevState,
+      [name]: e.target.value
+    }));
+  }
 
   return (
     <>
@@ -57,14 +54,15 @@ function App() {
           <CustomDropDown
             array={characters}
             criteria={"Character"}
-            onChange={selectCharHandler}
+            handlerFunction={selectHandler}
+            name={"characterId"}
           />
           <CustomDropDown
             array={locations}
             criteria={"Locations"}
-            onChange={selectLocaHandler}
-          />
-          
+            handlerFunction={selectHandler}
+            name={"locationId"}
+          />         
         </>
       ) : (
         <div>No han llegado aún.</div>
