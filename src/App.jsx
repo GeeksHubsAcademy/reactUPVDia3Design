@@ -15,6 +15,7 @@ function App() {
   });
 
   useEffect(() => {
+    //En este useEffect nutre de personajes a characters
     if (characters.length === 0) {
       bringCharactersForDropdown()
         .then((results) => {
@@ -25,6 +26,7 @@ function App() {
   }, [characters]);
 
   useEffect(() => {
+    //Este useEffect nutre de localizaciones a locations
     if (locations.length === 0) {
       bringLocationsForDropdown()
         .then((results) => {
@@ -36,6 +38,7 @@ function App() {
   }, [locations]);
   
   useEffect(()=> {
+    //useEffect que nos muestra el valor del objeto con varias propiedades JS
     console.log(selectedData);
   }, [selectedData])
 
@@ -52,16 +55,16 @@ function App() {
       {(characters.length > 0 && locations.length > 0) ? (
         <>
           <CustomDropDown
+            name={"characterId"}
             array={characters}
             criteria={"Character"}
             handlerFunction={selectHandler}
-            name={"characterId"}
           />
           <CustomDropDown
+            name={"locationId"}
             array={locations}
             criteria={"Locations"}
             handlerFunction={selectHandler}
-            name={"locationId"}
           />         
         </>
       ) : (
