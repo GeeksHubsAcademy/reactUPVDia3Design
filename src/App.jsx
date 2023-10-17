@@ -34,7 +34,7 @@ function App() {
             array={characters}
             criteria={"Character"}
             functionHandler={selectCharHandler}      
-          />       
+        />       
       ) : (
         <div>No han llegado aún.</div>
       )}
