@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 import { bringCharactersForDropdown } from "./services/apiCalls";
+import { CustomDropDown } from "./common/CustomDropdown/CustomDropDown";
 
 function App() {
   const [characters, setCharacters] = useState([]);
@@ -29,16 +30,11 @@ function App() {
   return (
     <>
       {characters.length > 0 ? (
-        <div>
-          <select onChange={selectCharHandler}>
-            <option value="Select a Character">
-              -- Select a Character --
-            </option>
-            {characters.map((character) => (
-              <option key={character.id} value={character.id}>{character.name}</option>
-            ))}
-          </select>
-        </div>
+        <CustomDropDown 
+            array={characters}
+            criteria={"Character"}
+            functionHandler={selectCharHandler}      
+          />       
       ) : (
         <div>No han llegado aún.</div>
       )}
